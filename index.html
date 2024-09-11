@@ -13,15 +13,27 @@
       font-size: 32px;
     }
 
-    /* Estilização para grid de streams */
-    .stream-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 20px;
-      padding: 20px;
+    /* Estilização para o carrossel de streams */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding: 20px 0;
+    }
+
+    .carousel-track-container {
+      display: flex;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease;
     }
 
     .stream-thumbnail {
+      min-width: 150px;
+      margin-right: 20px;
       text-align: center;
       border: 2px solid #ddd;
       border-radius: 8px;
@@ -32,6 +44,32 @@
     .stream-thumbnail img {
       width: 100%;
       height: auto;
+    }
+
+    /* Estilo dos botões de navegação */
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .carousel-button.left {
+      left: 10px;
+    }
+
+    .carousel-button.right {
+      right: 10px;
     }
 
     /* Estilo do botão */
@@ -73,20 +111,66 @@
     </nav>
   </header>
   <main>
-    <section class="stream-grid">
-      <div class="stream-thumbnail">
-        <img src="https://via.placeholder.com/150" alt="Thumbnail 1">
+    <section class="carousel">
+      <button class="carousel-button left">&lt;</button>
+      <div class="carousel-track-container">
+        <div class="carousel-track">
+          <div class="stream-thumbnail">
+            <img src="https://via.placeholder.com/150" alt="Thumbnail 1">
+          </div>
+          <div class="stream-thumbnail">
+            <img src="https://via.placeholder.com/150" alt="Thumbnail 2">
+          </div>
+          <div class="stream-thumbnail">
+            <img src="https://via.placeholder.com/150" alt="Thumbnail 3">
+          </div>
+          <div class="stream-thumbnail">
+            <img src="https://via.placeholder.com/150" alt="Thumbnail 4">
+          </div>
+          <div class="stream-thumbnail">
+            <img src="https://via.placeholder.com/150" alt="Thumbnail 5">
+          </div>
+          <!-- Adicione mais miniaturas conforme necessário -->
+        </div>
       </div>
-      <div class="stream-thumbnail">
-        <img src="https://via.placeholder.com/150" alt="Thumbnail 2">
-      </div>
-      <div class="stream-thumbnail">
-        <img src="https://via.placeholder.com/150" alt="Thumbnail 3">
-      </div>
-      <!-- Adicione mais miniaturas conforme necessário -->
+      <button class="carousel-button right">&gt;</button>
     </section>
     <button id="action-button">Ação</button>
   </main>
   <script src="mobile-navbar.js"></script>
+  <script>
+    const track = document.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    const nextButton = document.querySelector('.carousel-button.right');
+    const prevButton = document.querySelector('.carousel-button.left');
+
+    const slideWidth = slides[0].getBoundingClientRect().width;
+    
+    const setSlidePosition = (slide, index) => {
+      slide.style.left = slideWidth * index + 'px';
+    }
+
+    slides.forEach(setSlidePosition);
+
+    nextButton.addEventListener('click', () => {
+      const currentSlide = track.querySelector('.active');
+      const nextSlide = currentSlide.nextElementSibling;
+      const amountToMove = nextSlide.style.left;
+
+      track.style.transform = 'translateX(-' + amountToMove + ')';
+      currentSlide.classList.remove('active');
+      nextSlide.classList.add('active');
+    });
+
+    prevButton.addEventListener('click', () => {
+      const currentSlide = track.querySelector('.active');
+      const prevSlide = currentSlide.previousElementSibling;
+      const amountToMove = prevSlide.style.left;
+
+      track.style.transform = 'translateX(-' + amountToMove + ')';
+      currentSlide.classList.remove('active');
+      prevSlide.classList.add('active');
+    });
+  </script>
 </body>
 </html>
