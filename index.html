@@ -8,6 +8,47 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   </head>
+  <style>
+        /* Aumentar o tamanho dos ícones */
+        ion-icon {
+            font-size: 32px;
+        }
+
+        /* Estilização para grid de streams */
+        .stream-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .stream-thumbnail {
+            text-align: center;
+        }
+
+        .stream-thumbnail img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Estilo do botão */
+        #action-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #ff5733;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block; /* Garantir que esteja visível */
+            z-index: 1000; /* Trazer o botão para frente */
+        }
+
+        #action-button:hover {
+            background-color: #ff784e; /* Efeito ao passar o mouse */
+        }
 
   <body>
     <header>
