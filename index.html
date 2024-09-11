@@ -118,30 +118,41 @@
         <div class="carousel-track">
           <!-- Adicione mais miniaturas conforme necessário -->
           <div class="stream-thumbnail">
-            <img src="https://via.placeholder.com/150" alt="Thumbnail 1">
+            <img src="https://via.placeholder.com/150?text=1" alt="Thumbnail 1">
           </div>
           <div class="stream-thumbnail">
-            <img src="https://via.placeholder.com/150" alt="Thumbnail 2">
+            <img src="https://via.placeholder.com/150?text=2" alt="Thumbnail 2">
           </div>
           <div class="stream-thumbnail">
-            <img src="https://via.placeholder.com/150" alt="Thumbnail 3">
+            <img src="https://via.placeholder.com/150?text=3" alt="Thumbnail 3">
           </div>
           <div class="stream-thumbnail">
-            <img src="https://via.placeholder.com/150" alt="Thumbnail 4">
+            <img src="https://via.placeholder.com/150?text=4" alt="Thumbnail 4">
           </div>
           <div class="stream-thumbnail">
-            <img src="https://via.placeholder.com/150" alt="Thumbnail 5">
+            <img src="https://via.placeholder.com/150?text=5" alt="Thumbnail 5">
           </div>
           <div class="stream-thumbnail">
-            <img src="https://via.placeholder.com/150" alt="Thumbnail 6">
+            <img src="https://via.placeholder.com/150?text=6" alt="Thumbnail 6">
           </div>
           <div class="stream-thumbnail">
-            <img src="https://via.placeholder.com/150" alt="Thumbnail 7">
+            <img src="https://via.placeholder.com/150?text=7" alt="Thumbnail 7">
           </div>
           <div class="stream-thumbnail">
-            <img src="https://via.placeholder.com/150" alt="Thumbnail 8">
+            <img src="https://via.placeholder.com/150?text=8" alt="Thumbnail 8">
           </div>
-          <!-- Adicione mais miniaturas conforme necessário -->
+          <div class="stream-thumbnail">
+            <img src="https://via.placeholder.com/150?text=9" alt="Thumbnail 9">
+          </div>
+          <div class="stream-thumbnail">
+            <img src="https://via.placeholder.com/150?text=10" alt="Thumbnail 10">
+          </div>
+          <div class="stream-thumbnail">
+            <img src="https://via.placeholder.com/150?text=11" alt="Thumbnail 11">
+          </div>
+          <div class="stream-thumbnail">
+            <img src="https://via.placeholder.com/150?text=12" alt="Thumbnail 12">
+          </div>
         </div>
       </div>
       <button class="carousel-button right">&gt;</button>
@@ -156,7 +167,7 @@
     const prevButton = document.querySelector('.carousel-button.left');
 
     const slideWidth = slides[0].getBoundingClientRect().width;
-    
+
     const setSlidePosition = (slide, index) => {
       slide.style.left = slideWidth * index + 'px';
     }
@@ -191,23 +202,22 @@
     track.addEventListener('mousemove', whileDragging);
 
     nextButton.addEventListener('click', () => {
-      const currentSlide = track.querySelector('.active');
-      const nextSlide = currentSlide.nextElementSibling;
-      const amountToMove = nextSlide.style.left;
-
-      track.style.transform = 'translateX(-' + amountToMove + ')';
-      currentSlide.classList.remove('active');
-      nextSlide.classList.add('active');
+      const trackWidth = track.scrollWidth - track.clientWidth;
+      const scrollAmount = track.scrollLeft + track.clientWidth;
+      if (scrollAmount <= trackWidth) {
+        track.scrollLeft = scrollAmount;
+      } else {
+        track.scrollLeft = 0;
+      }
     });
 
     prevButton.addEventListener('click', () => {
-      const currentSlide = track.querySelector('.active');
-      const prevSlide = currentSlide.previousElementSibling;
-      const amountToMove = prevSlide.style.left;
-
-      track.style.transform = 'translateX(-' + amountToMove + ')';
-      currentSlide.classList.remove('active');
-      prevSlide.classList.add('active');
+      const scrollAmount = track.scrollLeft - track.clientWidth;
+      if (scrollAmount >= 0) {
+        track.scrollLeft = scrollAmount;
+      } else {
+        track.scrollLeft = track.scrollWidth - track.clientWidth;
+      }
     });
   </script>
 </body>
