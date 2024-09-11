@@ -1,73 +1,92 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Navbar</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-      /* Aumentar o tamanho dos ícones */
-      .fa-icon {
-        font-size: 32px;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Navbar</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Aumentar o tamanho dos ícones */
+    .fa-icon {
+      font-size: 32px;
+    }
 
-      /* Estilização para grid de streams */
-      .stream-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 20px;
-      }
+    /* Estilização para grid de streams */
+    .stream-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
 
-      .stream-thumbnail {
-        text-align: center;
-      }
+    .stream-thumbnail {
+      text-align: center;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
 
-      .stream-thumbnail img {
-        width: 100%;
-        height: auto;
-      }
+    .stream-thumbnail img {
+      width: 100%;
+      height: auto;
+    }
 
-      /* Estilo do botão */
-      #action-button {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        padding: 10px 20px;
-        background-color: #ff5733;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        display: block; /* Garantir que esteja visível */
-        z-index: 1000; /* Trazer o botão para frente */
-      }
+    /* Estilo do botão */
+    #action-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color: #ff5733;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      display: block; /* Garantir que esteja visível */
+      z-index: 1000; /* Trazer o botão para frente */
+    }
 
-      #action-button:hover {
-        background-color: #ff784e; /* Efeito ao passar o mouse */
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <nav>
-        <a class="logo" href="/">Dev Stream</a>
-        <div class="mobile-menu">
-          <div class="line1"></div>
-          <div class="line2"></div>
-          <div class="line3"></div>
-        </div>
-        <ul class="nav-list">
-          <li><a href="#"><i class="fas fa-home"></i> Início</a></li>
-          <li><a href="#"><i class="fas fa-user"></i> Sobre</a></li>
-          <li><a href="#"><i class="fas fa-project-diagram"></i> Projetos</a></li>
-          <li><a href="#"><i class="fas fa-envelope"></i> Contato</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main></main>
-    <script src="mobile-navbar.js"></script>
-  </body>
+    #action-button:hover {
+      background-color: #ff784e; /* Efeito ao passar o mouse */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a class="logo" href="/">Dev Stream</a>
+      <div class="mobile-menu">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+      <ul class="nav-list">
+        <li><a href="#"><i class="fas fa-home"></i> Início</a></li>
+        <li><a href="#"><i class="fas fa-user"></i> Sobre</a></li>
+        <li><a href="#"><i class="fas fa-project-diagram"></i> Projetos</a></li>
+        <li><a href="#"><i class="fas fa-envelope"></i> Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="stream-grid">
+      <div class="stream-thumbnail">
+        <img src="https://via.placeholder.com/150" alt="Thumbnail 1">
+      </div>
+      <div class="stream-thumbnail">
+        <img src="https://via.placeholder.com/150" alt="Thumbnail 2">
+      </div>
+      <div class="stream-thumbnail">
+        <img src="https://via.placeholder.com/150" alt="Thumbnail 3">
+      </div>
+      <!-- Adicione mais miniaturas conforme necessário -->
+    </section>
+    <button id="action-button">Ação</button>
+  </main>
+  <script src="mobile-navbar.js"></script>
+</body>
 </html>
