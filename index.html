@@ -24,6 +24,7 @@
     .carousel-track-container {
       display: flex;
       overflow: hidden;
+      width: 100%;
     }
 
     .carousel-track {
@@ -115,6 +116,7 @@
       <button class="carousel-button left">&lt;</button>
       <div class="carousel-track-container">
         <div class="carousel-track">
+          <!-- Adicione mais miniaturas conforme necessário -->
           <div class="stream-thumbnail">
             <img src="https://via.placeholder.com/150" alt="Thumbnail 1">
           </div>
@@ -129,6 +131,15 @@
           </div>
           <div class="stream-thumbnail">
             <img src="https://via.placeholder.com/150" alt="Thumbnail 5">
+          </div>
+          <div class="stream-thumbnail">
+            <img src="https://via.placeholder.com/150" alt="Thumbnail 6">
+          </div>
+          <div class="stream-thumbnail">
+            <img src="https://via.placeholder.com/150" alt="Thumbnail 7">
+          </div>
+          <div class="stream-thumbnail">
+            <img src="https://via.placeholder.com/150" alt="Thumbnail 8">
           </div>
           <!-- Adicione mais miniaturas conforme necessário -->
         </div>
@@ -151,6 +162,33 @@
     }
 
     slides.forEach(setSlidePosition);
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    const startDragging = (e) => {
+      isDown = true;
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    };
+
+    const stopDragging = () => {
+      isDown = false;
+    };
+
+    const whileDragging = (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 3; // scroll-fast
+      track.scrollLeft = scrollLeft - walk;
+    };
+
+    track.addEventListener('mousedown', startDragging);
+    track.addEventListener('mouseleave', stopDragging);
+    track.addEventListener('mouseup', stopDragging);
+    track.addEventListener('mousemove', whileDragging);
 
     nextButton.addEventListener('click', () => {
       const currentSlide = track.querySelector('.active');
