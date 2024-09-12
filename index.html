@@ -183,6 +183,36 @@
         event.preventDefault();
       }
     });
+
+    // Adicionando arrastar com o mouse
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    trackContainer.addEventListener('mousedown', (e) => {
+      isDown = true;
+      trackContainer.classList.add('active');
+      startX = e.pageX - trackContainer.offsetLeft;
+      scrollLeft = trackContainer.scrollLeft;
+    });
+
+    trackContainer.addEventListener('mouseleave', () => {
+      isDown = false;
+      trackContainer.classList.remove('active');
+    });
+
+    trackContainer.addEventListener('mouseup', () => {
+      isDown = false;
+      trackContainer.classList.remove('active');
+    });
+
+    trackContainer.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - trackContainer.offsetLeft;
+      const walk = (x - startX) * 2; // Ajuste a velocidade conforme necessário
+      trackContainer.scrollLeft = scrollLeft - walk;
+    });
   </script>
 </body>
 </html>
