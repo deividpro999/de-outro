@@ -22,11 +22,20 @@
       scroll-behavior: smooth;
       width: 100%;
       padding: 0 20px;
+      scrollbar-width: none; /* Para navegadores que suportam */
+    }
+
+    .carousel-track-container::-webkit-scrollbar {
+      display: none; /* Ocultar a barra de rolagem para WebKit */
     }
 
     .carousel-track {
       display: flex;
       gap: 20px;
+      align-items: center;
+      padding: 0; /* Remover padding se necessário */
+      margin: 0; /* Remover margin se necessário */
+      border: none; /* Garantir que não há borda */
     }
 
     .stream-thumbnail {
