@@ -24,6 +24,7 @@
       padding: 0 20px;
       scrollbar-width: none; /* Para navegadores que suportam */
       cursor: grab; /* Mostrar cursor de arrasto */
+      -ms-overflow-style: none; /* Para Internet Explorer e Edge */
     }
 
     .carousel-track-container::-webkit-scrollbar {
@@ -34,9 +35,6 @@
       display: flex;
       gap: 20px;
       align-items: center;
-      padding: 0; /* Remover padding se necessário */
-      margin: 0; /* Remover margin se necessário */
-      border: none; /* Garantir que não há borda */
     }
 
     .stream-thumbnail {
@@ -192,22 +190,19 @@
 
     trackContainer.addEventListener('mousedown', (e) => {
       isDown = true;
-      trackContainer.classList.add('active');
       startX = e.pageX - trackContainer.offsetLeft;
       scrollLeft = trackContainer.scrollLeft;
-      trackContainer.style.cursor = 'grabbing'; // Mudar o cursor
+      trackContainer.style.cursor = 'grabbing';
     });
 
     trackContainer.addEventListener('mouseleave', () => {
       isDown = false;
-      trackContainer.classList.remove('active');
-      trackContainer.style.cursor = 'grab'; // Voltar ao cursor de arrasto
+      trackContainer.style.cursor = 'grab';
     });
 
     trackContainer.addEventListener('mouseup', () => {
       isDown = false;
-      trackContainer.classList.remove('active');
-      trackContainer.style.cursor = 'grab'; // Voltar ao cursor de arrasto
+      trackContainer.style.cursor = 'grab';
     });
 
     trackContainer.addEventListener('mousemove', (e) => {
