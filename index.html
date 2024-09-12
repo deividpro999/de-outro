@@ -23,6 +23,7 @@
       width: 100%;
       padding: 0 20px;
       scrollbar-width: none; /* Para navegadores que suportam */
+      cursor: grab; /* Mostrar cursor de arrasto */
     }
 
     .carousel-track-container::-webkit-scrollbar {
@@ -120,7 +121,7 @@
   <main>
     <section class="carousel">
       <button class="carousel-button left">&lt;</button>
-      <div class="carousel-track-container">
+      <div class="carousel-track-container" id="carouselContainer">
         <div class="carousel-track">
           <!-- Adicione mais miniaturas conforme necessário -->
           <div class="stream-thumbnail">
@@ -161,7 +162,7 @@
   </main>
   <script>
     const track = document.querySelector('.carousel-track');
-    const trackContainer = document.querySelector('.carousel-track-container');
+    const trackContainer = document.getElementById('carouselContainer');
     const nextButton = document.querySelector('.carousel-button.right');
     const prevButton = document.querySelector('.carousel-button.left');
     const scrollAmount = 150; // Ajuste conforme necessário
@@ -194,16 +195,19 @@
       trackContainer.classList.add('active');
       startX = e.pageX - trackContainer.offsetLeft;
       scrollLeft = trackContainer.scrollLeft;
+      trackContainer.style.cursor = 'grabbing'; // Mudar o cursor
     });
 
     trackContainer.addEventListener('mouseleave', () => {
       isDown = false;
       trackContainer.classList.remove('active');
+      trackContainer.style.cursor = 'grab'; // Voltar ao cursor de arrasto
     });
 
     trackContainer.addEventListener('mouseup', () => {
       isDown = false;
       trackContainer.classList.remove('active');
+      trackContainer.style.cursor = 'grab'; // Voltar ao cursor de arrasto
     });
 
     trackContainer.addEventListener('mousemove', (e) => {
