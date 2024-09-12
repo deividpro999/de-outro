@@ -159,7 +159,6 @@
     <button id="action-button">Ação</button>
   </main>
   <script>
-    const track = document.querySelector('.carousel-track');
     const trackContainer = document.getElementById('carouselContainer');
     const nextButton = document.querySelector('.carousel-button.right');
     const prevButton = document.querySelector('.carousel-button.left');
@@ -209,7 +208,7 @@
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - trackContainer.offsetLeft;
-      const walk = (x - startX) * 2; // Ajuste a velocidade conforme necessário
+      const walk = (x - startX); // Ajuste a velocidade conforme necessário
       trackContainer.scrollLeft = scrollLeft - walk;
     });
   </script>
