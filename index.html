@@ -19,17 +19,18 @@
     .carousel-track-container {
       display: flex;
       overflow-x: auto;
-      scroll-behavior: smooth; /* Adiciona uma rolagem suave */
+      scroll-behavior: smooth;
       width: 100%;
+      padding: 0 20px;
     }
 
     .carousel-track {
       display: flex;
-      gap: 20px; /* Espaçamento entre miniaturas */
+      gap: 20px;
     }
 
     .stream-thumbnail {
-      flex: 0 0 auto; /* Impede que as miniaturas encolham */
+      flex: 0 0 auto;
       min-width: 150px;
       text-align: center;
       border: 2px solid #ddd;
@@ -81,12 +82,12 @@
       border-radius: 5px;
       cursor: pointer;
       font-size: 16px;
-      display: block; /* Garantir que esteja visível */
-      z-index: 1000; /* Trazer o botão para frente */
+      display: block;
+      z-index: 1000;
     }
 
     #action-button:hover {
-      background-color: #ff784e; /* Efeito ao passar o mouse */
+      background-color: #ff784e;
     }
   </style>
 </head>
@@ -151,24 +152,27 @@
   </main>
   <script>
     const track = document.querySelector('.carousel-track');
-    const slides = Array.from(track.children);
+    const trackContainer = document.querySelector('.carousel-track-container');
     const nextButton = document.querySelector('.carousel-button.right');
     const prevButton = document.querySelector('.carousel-button.left');
+    const scrollAmount = 150; // Ajuste conforme necessário
 
-    const slideWidth = slides[0].getBoundingClientRect().width;
-
-    const setSlidePosition = (slide, index) => {
-      slide.style.left = slideWidth * index + 'px';
-    }
-
-    slides.forEach(setSlidePosition);
-
+    // Função para mover o carrossel para a direita
     nextButton.addEventListener('click', () => {
-      track.scrollLeft += slides[0].getBoundingClientRect().width;
+      trackContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     });
 
+    // Função para mover o carrossel para a esquerda
     prevButton.addEventListener('click', () => {
-      track.scrollLeft -= slides[0].getBoundingClientRect().width;
+      trackContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    // Adicionando rolagem com o mouse
+    trackContainer.addEventListener('wheel', (event) => {
+      if (event.deltaY !== 0) {
+        trackContainer.scrollBy({ left: event.deltaY, behavior: 'smooth' });
+        event.preventDefault();
+      }
     });
   </script>
 </body>
