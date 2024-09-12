@@ -8,11 +8,6 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* Aumentar o tamanho dos ícones */
-    .fa-icon {
-      font-size: 32px;
-    }
-
     /* Estilização para o carrossel de streams */
     .carousel {
       position: relative;
@@ -23,20 +18,19 @@
 
     .carousel-track-container {
       display: flex;
-      overflow: hidden;
+      overflow-x: auto;
+      scroll-behavior: smooth; /* Adiciona uma rolagem suave */
       width: 100%;
-      position: relative;
     }
 
     .carousel-track {
       display: flex;
-      transition: transform 0.5s ease;
-      width: 100%;
+      gap: 20px; /* Espaçamento entre miniaturas */
     }
 
     .stream-thumbnail {
+      flex: 0 0 auto; /* Impede que as miniaturas encolham */
       min-width: 150px;
-      margin-right: 20px;
       text-align: center;
       border: 2px solid #ddd;
       border-radius: 8px;
@@ -155,7 +149,6 @@
     </section>
     <button id="action-button">Ação</button>
   </main>
-  <script src="mobile-navbar.js"></script>
   <script>
     const track = document.querySelector('.carousel-track');
     const slides = Array.from(track.children);
@@ -170,50 +163,12 @@
 
     slides.forEach(setSlidePosition);
 
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    const startDragging = (e) => {
-      isDown = true;
-      startX = e.pageX - track.offsetLeft;
-      scrollLeft = track.scrollLeft;
-    };
-
-    const stopDragging = () => {
-      isDown = false;
-    };
-
-    const whileDragging = (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - track.offsetLeft;
-      const walk = (x - startX) * 3; // scroll-fast
-      track.scrollLeft = scrollLeft - walk;
-    };
-
-    track.addEventListener('mousedown', startDragging);
-    track.addEventListener('mouseleave', stopDragging);
-    track.addEventListener('mouseup', stopDragging);
-    track.addEventListener('mousemove', whileDragging);
-
     nextButton.addEventListener('click', () => {
-      const trackWidth = track.scrollWidth - track.clientWidth;
-      const scrollAmount = track.scrollLeft + track.clientWidth;
-      if (scrollAmount <= trackWidth) {
-        track.scrollLeft = scrollAmount;
-      } else {
-        track.scrollLeft = 0;
-      }
+      track.scrollLeft += slides[0].getBoundingClientRect().width;
     });
 
     prevButton.addEventListener('click', () => {
-      const scrollAmount = track.scrollLeft - track.clientWidth;
-      if (scrollAmount >= 0) {
-        track.scrollLeft = scrollAmount;
-      } else {
-        track.scrollLeft = track.scrollWidth - track.clientWidth;
-      }
+      track.scrollLeft -= slides[0].getBoundingClientRect().width;
     });
   </script>
 </body>
