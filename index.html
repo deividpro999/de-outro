@@ -52,7 +52,6 @@
       height: auto;
     }
 
-    /* Estilo dos botões de navegação */
     .carousel-button {
       position: absolute;
       top: 50%;
@@ -78,7 +77,6 @@
       right: 10px;
     }
 
-    /* Estilo do botão */
     #action-button {
       position: fixed;
       bottom: 20px;
@@ -121,7 +119,6 @@
       <button class="carousel-button left">&lt;</button>
       <div class="carousel-track-container" id="carouselContainer">
         <div class="carousel-track">
-          <!-- Adicione mais miniaturas conforme necessário -->
           <div class="stream-thumbnail">
             <img src="https://via.placeholder.com/150?text=1" alt="Thumbnail 1">
           </div>
@@ -208,8 +205,17 @@
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - trackContainer.offsetLeft;
-      const walk = (x - startX); // Ajuste a velocidade conforme necessário
+      const walk = (x - startX) * 2; // Ajuste a velocidade conforme necessário
       trackContainer.scrollLeft = scrollLeft - walk;
+    });
+
+    // Adicionando navegação com as setas do teclado
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        trackContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      } else if (e.key === 'ArrowLeft') {
+        trackContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      }
     });
   </script>
 </body>
