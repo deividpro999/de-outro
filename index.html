@@ -95,6 +95,22 @@
     #action-button:hover {
       background-color: #ff784e;
     }
+
+    /* Estilos para o botão de login com Google */
+    #google-login-btn {
+      background-color: #4285F4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    #google-login-btn:hover {
+      background-color: #357ae8;
+    }
   </style>
 </head>
 <body>
@@ -154,7 +170,41 @@
       <button class="carousel-button right">&gt;</button>
     </section>
     <button id="action-button">Ação</button>
+    <!-- Botão de login com Google -->
+    <button id="google-login-btn" onclick="signInWithGoogle()">Login com Google</button>
   </main>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
+  <script>
+    // Configurações do Firebase
+    const firebaseConfig = {
+      apiKey: "sua-api-key",
+      authDomain: "seu-projeto.firebaseapp.com",
+      projectId: "seu-projeto-id",
+      storageBucket: "seu-projeto.appspot.com",
+      messagingSenderId: "seu-id-de-mensagem",
+      appId: "seu-id-de-aplicativo"
+    };
+
+    // Inicializa o Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Referência ao Auth
+    const auth = firebase.auth();
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+    // Função para iniciar o login com Google
+    function signInWithGoogle() {
+      auth.signInWithPopup(googleProvider)
+        .then((result) => {
+          console.log("Usuário logado:", result.user);
+          // Redirecionar ou atualizar a UI conforme necessário
+        })
+        .catch((error) => {
+          console.error("Erro ao fazer login:", error);
+        });
+    }
+  </script>
   <script>
     const trackContainer = document.getElementById('carouselContainer');
     const nextButton = document.querySelector('.carousel-button.right');
@@ -205,17 +255,8 @@
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - trackContainer.offsetLeft;
-      const walk = (x - startX) * 2; // Ajuste a velocidade conforme necessário
+      const walk = (x - startX) * 2; // Aumentar o número para rolar mais rápido
       trackContainer.scrollLeft = scrollLeft - walk;
-    });
-
-    // Adicionando navegação com as setas do teclado
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') {
-        trackContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-      } else if (e.key === 'ArrowLeft') {
-        trackContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-      }
     });
   </script>
 </body>
